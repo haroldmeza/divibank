@@ -1,0 +1,116 @@
+
+<div class="container">
+    <app-title title="Registration" subtitle="Registration form"></app-title>
+    <div class="columns">
+        <div class="column is-size-3"></div>
+        <div class="column is-size-5">
+            <app-alert 
+                *ngIf="alert" 
+                [type]="alert.type" 
+                [header]="alert.header" 
+                [message]="alert.message"
+                (onClose) = "resetAlert()">
+            </app-alert>
+        </div>
+        <div class="column is-size-3"></div>
+    </div>
+    <div class="columns">
+        <div class="column is-size-3"></div>
+        <div class="column is-size-5">
+            <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input 
+                            [class]="checkTouchedOrDirty('Name') ? getValid('Name') ? 'is-success' : 'is-danger' : ''" 
+                            class="input" 
+                            type="text" 
+                            placeholder="Customer name" 
+                            formControlName="Name">
+                        <span class="icon is-small is-left">
+                            <fa-icon [icon]="faUser"></fa-icon>
+                        </span>
+                        <span class="icon is-small is-right" *ngIf="checkTouchedOrDirty('Name')">
+                            <fa-icon [icon]="getValid('Name') ? faCheck : faExclamationTriangle"></fa-icon>
+                        </span>
+                    </div>
+                    <p *ngIf="!getValid('Name')" class="help is-danger">Name is required</p>
+                </div>
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input 
+                            [class]="checkTouchedOrDirty('Email') ? getValid('Email') ? 'is-success' : 'is-danger' : ''" 
+                            class="input" 
+                            type="text" 
+                            placeholder="Customer email" 
+                            formControlName="Email">
+                        <span class="icon is-small is-left">
+                            <fa-icon [icon]="faMailBulk"></fa-icon>
+                        </span>
+                        <span class="icon is-small is-right" *ngIf="checkTouchedOrDirty('Email')">
+                            <fa-icon [icon]="getValid('Email') ? faCheck : faExclamationTriangle"></fa-icon>
+                        </span>
+                    </div>
+                    <p *ngIf="!getValid('email')" class="help is-danger">Email is required</p>
+                </div>
+                <div class="field">
+                    <label class="label">Id</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input 
+                            [class]="checkTouchedOrDirty('IdNumber') ? getValid('IdNumber') ? 'is-success' : 'is-danger' : ''" 
+                            class="input" 
+                            type="text" 
+                            placeholder="Customer id" 
+                            formControlName="IdNumber">
+                        <span class="icon is-small is-left">
+                            <fa-icon [icon]="faIdCard"></fa-icon>
+                        </span>
+                        <span class="icon is-small is-right" *ngIf="checkTouchedOrDirty('IdNumber')">
+                            <fa-icon [icon]="getValid('IdNumber') ? faCheck : faExclamationTriangle"></fa-icon>
+                        </span>
+                    </div>
+                    <p *ngIf="!getValid('id')" class="help is-danger">Id is required</p>
+                </div>
+                <div class="field">
+                    <label class="label">Birth date</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input 
+                            [class]="checkTouchedOrDirty('BirthDate') ? getValid('BirthDate') ? 'is-success' : 'is-danger' : ''" 
+                            class="input" 
+                            type="date" 
+                            placeholder="Birth date" 
+                            formControlName="BirthDate">
+                        <span class="icon is-small is-left">
+                            <fa-icon [icon]="faCalendar"></fa-icon>
+                        </span>
+                        <span class="icon is-small is-right" *ngIf="checkTouchedOrDirty('BirthDate')">
+                            <fa-icon [icon]="getValid('BirthDate') ? faCheck : faExclamationTriangle"></fa-icon>
+                        </span>
+                    </div>
+                    <p *ngIf="!getValid('birthdate')" class="help is-danger">Invalid date</p>
+                </div>
+                <div class="field">
+                    <label class="label">Sex</label>
+                    <div class="control has-icons-left">
+                        <div class="select">
+                          <select formControlName="Sex">
+                              <option *ngFor="let s of sexs" [value]="s.sex">{{s.sex}}</option>
+                          </select>
+                        </div>
+                        <div class="icon is-small is-left">
+                            <fa-icon [icon]="getIcon()"></fa-icon>
+                        </div>
+                      </div>
+                </div>
+                <div class="field mt-5">
+                    <button class="button is-primary width-100" [disabled]="this.registerForm.invalid || !this.registerForm.touched">
+                        <fa-icon [icon]="faPlus"></fa-icon>
+                        <span class="ml-2">Create</span>
+                      </button>
+                </div>
+            </form>
+        </div>
+        <div class="column is-size-3"></div>
+    </div>
+</div>

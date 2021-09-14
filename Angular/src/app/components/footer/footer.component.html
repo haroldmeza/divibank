@@ -1,0 +1,19 @@
+<footer class="mt-6">
+    <div class="container py-5">
+        <div class="columns is-multiline">
+            <div class="column is-4"></div>
+            <div class="column is-4 is-flex is-flex-direction-column">
+                <img src="../../../assets/logo-divi-branco.svg" alt="Divibank">
+                <div class="is-flex is-justify-content-center mt-2">
+                    <a [href]="media.url" *ngFor="let media of medias" class="ml-2">
+                        <img [src]="'../../../assets/' + media.name + '.png'" [alt]="media.name">
+                    </a>
+                </div>
+            </div>
+            <div class="column is-4"></div>
+            <div class="column is-full copyright-section">
+                <h2 class="has-text-white is-size-5">2021 Divibank. All Rights Reserved</h2>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,9 @@
+<article [class]="['message', getType()]">
+    <div class="message-header" *ngIf="header">
+      <p>{{header}}</p>
+      <button class="delete" aria-label="delete" (click)="onDelete()"></button>
+    </div>
+    <div class="message-body" [innerHTML]="message">
+      
+    </div>
+  </article>

@@ -1,0 +1,54 @@
+<form [formGroup]="loansForm" (ngSubmit)="submitForm()">
+    <div class="columns is-multiline">
+        <div class="column is-3"></div>
+        <div class="column is-5 is-flex is-flex-direction-column" formArrayName="loans">
+            <h2 class="is-size-3">{{customer.name}}</h2>
+            <span class="is-size-5">{{customer.idNumber}} - {{customer.email}}</span>
+            <button class="button is-success is-outlined my-3" (click)="addNewLoan()">
+                <fa-icon [icon]="faPlus"></fa-icon>
+                <span class="ml-2">New loan</span>
+            </button>
+            <div *ngIf="loans.controls.length" class="is-flex is-flex-direction-column">
+                <div class="is-flex is-justify-content-space-between" *ngFor="let l of loans.controls, index as li">
+                    <ng-container [formGroupName]="li">
+                        <div class="field">
+                            <label class="label">Loan</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input 
+                                    [class]="checkTouchedOrDirty(loans, li, 'amount') ? getValid(loans, li, 'amount') ? 'is-success' : 'is-danger' : ''" 
+                                    class="input" 
+                                    type="text" 
+                                    placeholder="Amount loan" 
+                                    formControlName="amount">
+                                <span class="icon is-small is-left">
+                                    <fa-icon [icon]="faMoneyBill"></fa-icon>
+                                </span>
+                                <span class="icon is-small is-right" *ngIf="checkTouchedOrDirty(loans, li, 'amount')">
+                                    <fa-icon [icon]="getValid(loans, li, 'amount') ? faCheck : faExclamationTriangle"></fa-icon>
+                                </span>
+                            </div>
+                            <p *ngIf="!getValid(loans, li, 'amount')" class="help is-danger">Invalid loan</p>
+                        </div>
+                        <button class="button is-danger is-align-self-center" (click)="deleteLoan(li)">
+                            <fa-icon [icon]="faTrashAlt"></fa-icon>
+                            <span class="ml-2">Delete</span>
+                        </button>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <div class="column is-3"></div>
+        <div class="column is-half">
+            <button type="submit" class="button is-primary"  [disabled]="isDisableForm()">
+                <fa-icon [icon]="faSave"></fa-icon>
+                <span class="ml-2">Save</span>
+            </button>
+        </div>
+        <div class="column is-half is-flex is-justify-content-flex-end">
+            <button class="button is-danger is-outlined" (click)="cancelEdition()">
+                <fa-icon [icon]="faTimes"></fa-icon>
+                <span class="ml-2">Cancel</span>
+            </button>
+        </div>
+    </div>
+</form>

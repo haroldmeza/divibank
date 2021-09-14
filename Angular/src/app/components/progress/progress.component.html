@@ -1,0 +1,10 @@
+<div class="modal is-active">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="is-flex is-align-items-center is-justify-content-center">
+        <fa-icon [icon]="faSpinner" [spin]="true" size="3x"></fa-icon>
+        <span class="has-text-white ml-4 is-size-5">{{message}}</span>
+      </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close" *ngIf="showCloseButton"></button>
+  </div>

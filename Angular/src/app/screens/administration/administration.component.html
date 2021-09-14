@@ -1,0 +1,36 @@
+<div class="container">
+    <app-title title="Administration" subtitle="Administration form"></app-title>
+    <div class="columns" *ngIf="!isEditingCustomerLoans; else elseBlockIsEdetingCustomerLoan">
+        <div class="column is-size-3"></div>
+        <div class="column is-size-5" *ngIf="customers.length; else elseBlock">
+            <div class="field" >
+                <label class="label">Customers</label>
+                <div class="control has-icons-left">
+                    <div class="select width-100">
+                        <select (change)="setCurrentCustomer($event.target.value)" class="width-100">
+                            <option *ngFor="let c of customers; let i = index" [value]="c.id" [selected]="c.id == currentCustomer.id ? 'selected' :''">{{c.name}}</option>
+                        </select>
+                    </div>
+                    <div class="icon is-small is-left">
+                        <fa-icon [icon]="faUser"></fa-icon>
+                    </div>
+                </div>
+            </div>
+            <div class="field mt-5" *ngIf="currentCustomer && currentCustomer.id">
+                <button class="button is-primary width-100" (click)="setIsEditingCustomerLoans(true)">
+                    <fa-icon [icon]="faEye"></fa-icon>
+                    <span class="ml-2">Show loans</span>
+                </button>
+            </div>
+        </div>
+        <ng-template #elseBlock>
+            <div class="column is-size-5">
+                <h2 class="is-size-4 has-text-danger has-text-centered">No customer</h2>
+            </div>
+        </ng-template>
+        <div class="column is-size-3"></div>
+    </div>
+    <ng-template #elseBlockIsEdetingCustomerLoan>
+        <app-loans [customer]="currentCustomer" (onCancel)="setIsEditingCustomerLoans($event)" (onSave)="customerUpdateLoans($event)"></app-loans>
+    </ng-template>
+</div>

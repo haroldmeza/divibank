@@ -1,0 +1,51 @@
+/* You can add global styles to this file, and also import other style files */
+
+$main-color : #383dae;
+$nav-color : white;
+$white-color : white;
+$black: black;
+$light-black: rgb(70, 70, 70);
+
+body, html{
+    height: 100%;
+    width: 100%;
+}
+.container-nav{
+    background-color: $main-color;
+    .navbar{
+        background-color: transparent;
+        color: $nav-color;
+        .navbar-menu{
+            .navbar-item:hover{
+                color: $main-color !important;
+            }
+        }
+        .navbar-start{
+            border-left: 1px solid $nav-color;
+        }
+    }
+}
+.main-container{
+    height: 100%;
+    width: 100%;
+}
+footer{
+    background-color: $main-color;
+    .copyright-section{
+        border-top: 2px solid white;
+    }
+}
+
+.title{
+    &::first-letter{
+        background-color: $main-color;
+        color: $white-color;
+    }
+    color: $black;
+}
+.subtitle{
+    color: $light-black;
+}
+.width-100{
+    width : 100%;
+}

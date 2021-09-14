@@ -1,0 +1,40 @@
+version: "3.9"
+
+services: 
+    db:
+        image: mysql:8.0
+        environment:
+            MYSQL_ROOT_PASSWORD: divibank
+            MYSQL_DATABASE: divibank
+            MYSQL_USER: divibank
+            MYSQL_PASSWORD: divibank
+        volumes:
+            - dbdata:/var/lib/mysql
+            - ./_MySQL_Init_Script:/docker-entrypoint-initdb.d
+        restart: always
+
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 9080:8080
+
+    divibanknetcore:
+        depends_on: 
+            - db
+        build: 
+            context: ./CustomerApp/CustomerApp
+            dockerfile: Dockerfile
+        ports: 
+            - "9090:9090"
+
+    angular:
+        container_name: frontend-angular
+        build: 
+            context: ./Angular
+            dockerfile: Dockerfile
+        ports:
+           - "4200:80"
+
+volumes:
+    dbdata:

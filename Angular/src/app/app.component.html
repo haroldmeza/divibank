@@ -1,0 +1,12 @@
+<div class="is-flex is-flex-direction-column main-container">
+  <div class="is-flex-shinrk-1">
+    <app-nav></app-nav>
+  </div>
+  <div class="is-flex-grow-1">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="is-flex-shinrk-1">
+    <app-footer></app-footer>
+  </div>
+</div>
+<app-progress *ngIf="showProgress" (onClose)="close()" showCloseButton="false" [message]="messageProgress"></app-progress>
